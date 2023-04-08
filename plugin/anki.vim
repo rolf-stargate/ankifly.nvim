@@ -3,8 +3,10 @@ if exists('g:loaded_anki') | finish | endif " Prevent loading this file more tha
 let s:save_cpo = &cpo " Save the current 'cpo' option"
 set cpo&vim " rest them to defaults
 
-" command to run our plugin
-command! Anki lua require('anki').Anki.Run()
+" ### Commands ###################################################################
+command! Anki lua require('anki').Anki.Run() -- Lets you choose the card type
+command! AnkiBasic lua require('anki').Anki.Run("Basic") -- Basic card type
+command! AnkiCloze lua require('anki').Anki.Run("Cloze") -- Cloze card type
 
 let &cpo = s:save_cpo " Restore the original 'cpo' option
 unlet s:save_cpo

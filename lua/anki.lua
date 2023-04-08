@@ -46,6 +46,8 @@ Anki.SelectModel = function(model_names, selected_deck, type)
 				Buffer.OpenWindow(selected_deck, choice)
 			end
 		end)
+	else
+		Buffer.OpenWindow(selected_deck, type)
 	end
 end
 
