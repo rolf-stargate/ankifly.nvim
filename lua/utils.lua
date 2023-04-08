@@ -1,4 +1,5 @@
 local Utils = {}
+
 Utils.GetFieldsFromBuff = function(buf, fields)
 	local extracted_fields = {}
 

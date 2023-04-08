@@ -4,19 +4,21 @@ local API = require("api")
 local Utils = require("utils")
 
 Buffer = {}
+
+-- ### Entry Point ################################################################
 Buffer.OpenWindow = function(deck, model)
 	local buf = api.nvim_create_buf(false, true)
 
-	local win = Buffer.PositionWindow(buf)
+	local win = Buffer.ConfigWindow(buf)
 	Buffer.SetDefaultsOptions(buf, win)
 
 	local fields = API.GetModelFieldNames(model)
 	Buffer.PopulateFields(buf, fields)
 
-	Buffer.SetModelSpecificOptions(buf, deck, model, fields)
+	Buffer.AddSaveKeymap(buf, deck, model, fields)
 end
 
-Buffer.PositionWindow = function(buf)
+Buffer.ConfigWindow = function(buf)
 	local width = 40
 	local height = 20
 	local row = math.floor((vim.o.lines - height) / 2)
@@ -35,8 +37,8 @@ Buffer.PositionWindow = function(buf)
 	return win
 end
 
+-- ### standard options #########################################################
 Buffer.SetDefaultsOptions = function(buf, win)
-	-- ### standard options #########################################################
 	api.nvim_buf_set_option(buf, "modifiable", true)
 	-- Add a mapping to save the card and close the window
 	api.nvim_buf_set_keymap(buf, "n", "q", "<Cmd>noautocmd q!<CR>", {})
@@ -52,13 +54,9 @@ Buffer.SetDefaultsOptions = function(buf, win)
 	api.nvim_command("setlocal textwidth=40")
 end
 
-Buffer.PopulateFields = function(buf, fields)
-	for key, value in pairs(fields) do
-		api.nvim_buf_set_lines(buf, key - 1, -1, true, { "# " .. value })
-	end
-end
-
-Buffer.SetModelSpecificOptions = function(buf, deck, model, fields)
+-- ### Add Save Keymap ################################################################
+-- Triggered by <S-s>
+Buffer.AddSaveKeymap = function(buf, deck, model, fields)
 	local params = {
 		buf = buf,
 		deck = deck,
@@ -74,6 +72,13 @@ Buffer.SetModelSpecificOptions = function(buf, deck, model, fields)
 	)
 end
 
+Buffer.PopulateFields = function(buf, fields)
+	for key, value in pairs(fields) do
+		api.nvim_buf_set_lines(buf, key - 1, -1, true, { "# " .. value })
+	end
+end
+
+-- ### Save Callback ##################################################################
 Buffer.Save = function(data)
 	data = vim.fn.json_decode(data)
 	local buf = data.buf

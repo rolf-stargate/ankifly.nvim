@@ -13,7 +13,7 @@ end
 
 local API = {}
 
--- Post
+-- ### Post #######################################################################
 API.Post = function(body)
 	body = vim.fn.json_encode(body)
 	return request(curl.post(URL, { body = body, headers = { content_type = "application/json" } }))
@@ -39,6 +39,7 @@ API.GetModelFieldNames = function(model_name)
 	return API.Post({ action = "modelFieldNames", version = 6, params = { modelName = model_name } })
 end
 
+-- ### Add Card ###################################################################
 API.AddCard = function(deck_name, model_name, fields)
 	local body = {
 		action = "addNote",

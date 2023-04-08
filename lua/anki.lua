@@ -2,6 +2,7 @@ local API = require("api")
 local Buffer = require("buffer")
 Anki = {}
 
+-- ### Entry Point ################################################################
 Anki.Run = function(type)
 	-- get deck names
 	local deck_names = API.GetDeckNames()
