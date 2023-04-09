@@ -85,11 +85,11 @@ end
 
 #### Menus
 
-Quit "<ESC>"
+Quit --> Esc
 
 #### Card Buffer
 
-Quit "q"
-Save "<S-s>"
+Quit --> q
+Save --> Shift+s
 
 Both in normal mode.
