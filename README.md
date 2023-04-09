@@ -1,5 +1,7 @@
 # ankifly.nvim
 
+![](https://github.com/rolf-stargate/ankifly.nvim/blob/main/showcase.gif)
+
 ## Description
 
 Create anki cards and decks on the fly. Should work with most card types/models but only tested with "Basic" and "Cloze" cards. It is also possible to add code blocks with the right anki plugin.
