@@ -35,19 +35,22 @@ end
 Utils.CheckForCodeBlocks = function(text)
 	local match = string.match(text, "```")
 	while match do
-		local language = string.match(text, "^```%s*(%w+)")
+		local language = string.match(text, "```%s*(%w+)")
 		if language then
 			text = string.gsub(text, language, "", 1)
+			text = string.gsub(
+				text,
+				"```",
+				'<pre style="display:flex; justify-content:center;"><code class="language-' .. language .. '"><br>',
+				1
+			)
+			text = string.gsub(text, "```", "</code></pre><br><br>", 1)
+			match = string.match(text, "```")
+		else
+			print("Error in code block!")
+			print("string to parse was: " .. text)
+			break
 		end
-
-		text = string.gsub(
-			text,
-			"```",
-			'<pre style="display:flex; justify-content:center;"><code class="language-' .. language .. '"><br>',
-			1
-		)
-		text = string.gsub(text, "```", "</code></pre><br><br>", 1)
-		match = string.match(text, "```")
 	end
 
 	return text
