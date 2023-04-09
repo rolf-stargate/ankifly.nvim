@@ -85,11 +85,11 @@ end
 
 #### Menus
 
-Quit <ESC>
+Quit "<ESC>"
 
 #### Card Buffer
 
-Quit q
-Save <S-s>
+Quit "q"
+Save "<S-s>"
 
 Both in normal mode.
