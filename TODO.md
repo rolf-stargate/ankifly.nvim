@@ -1,3 +1,3 @@
-- [ ] refactor code
 - [ ] select last deck in the menu
-- [ ] dynamic model selection
+- [x] dynamic model selection
+- [x] refactor code
