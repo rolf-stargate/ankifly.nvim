@@ -85,11 +85,11 @@ end
 
 #### Menus
 
-Quit --> Esc
+- Quit --> Esc
 
 #### Card Buffer
 
-Quit --> q
-Save --> Shift+s
+- Quit --> q
+- Save --> Shift+s
 
 Both in normal mode.
