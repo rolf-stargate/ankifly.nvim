@@ -59,9 +59,9 @@ Open Neovim and use one of the commands below.
 
 ### Commands
 
-Anki -> choose deck and card type/model
-AnkiBasic -> choose deck and use "Basic" card
-AnkiCloze -> choose deck and use "Cloze" card
+- Anki -> choose deck and card type/model
+- AnkiBasic -> choose deck and use "Basic" card
+- AnkiCloze -> choose deck and use "Cloze" card
 
 You can add a new deck by choosing "Add Deck" in the deck select menu and a prompt for
 a new name will appear.
