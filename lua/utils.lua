@@ -11,6 +11,10 @@ Utils.GetFieldsFromBuff = function(buf, fields)
 		extracted_fields[key] = Utils.CheckForCodeBlocks(field)
 	end
 
+	for key, field in pairs(extracted_fields) do
+		extracted_fields[key] = Utils.replaceBrTagInCodeBlock(field)
+	end
+
 	return extracted_fields
 end
 
@@ -51,6 +55,16 @@ Utils.CheckForCodeBlocks = function(text)
 			print("string to parse was: " .. text)
 			break
 		end
+	end
+
+	return text
+end
+
+Utils.replaceBrTagInCodeBlock = function(text)
+	local codeBlockContent = string.match(text, '<code class=".-"><br><br>(.-)</code>')
+	if codeBlockContent then
+		local parsedCodeBlockContent = string.gsub(codeBlockContent, "<br>", "\n")
+		text = string.gsub(text, codeBlockContent, parsedCodeBlockContent)
 	end
 
 	return text
