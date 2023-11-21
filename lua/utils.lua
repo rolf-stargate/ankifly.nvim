@@ -64,7 +64,12 @@ Utils.replaceBrTagInCodeBlock = function(text)
 	local codeBlockContent = string.match(text, '<code class=".-"><br><br>(.-)</code>')
 	if codeBlockContent then
 		local parsedCodeBlockContent = string.gsub(codeBlockContent, "<br>", "\n")
-		text = string.gsub(text, codeBlockContent, parsedCodeBlockContent)
+		print(parsedCodeBlockContent)
+		text = string.gsub(
+			text,
+			'<code class=".-"><br><br>.-</code>',
+			'<code class=".-"><br>' .. parsedCodeBlockContent .. "</code>"
+		)
 	end
 
 	return text
