@@ -19,8 +19,8 @@ Buffer.OpenWindow = function(deck, model)
 end
 
 Buffer.ConfigWindow = function(buf)
-	local width = 40
-	local height = 20
+	local width = 70
+	local height = 90
 	local row = math.floor((vim.o.lines - height) / 2)
 	local col = math.floor((vim.o.columns - width) / 2)
 
