@@ -51,7 +51,7 @@ Buffer.SetDefaultsOptions = function(buf, win)
 	-- Set wrap
 	api.nvim_command("setlocal wrap")
 	-- Set textwidth
-	api.nvim_command("setlocal textwidth=40")
+	api.nvim_command("setlocal textwidth=80")
 end
 
 -- ### Add Save Keymap ################################################################
