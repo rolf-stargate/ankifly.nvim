@@ -7,6 +7,7 @@ set cpo&vim " rest them to defaults
 command! Anki lua require('anki').Anki.Run() -- Lets you choose the card type
 command! AnkiBasic lua require('anki').Anki.Run("Basic") -- Basic card type
 command! AnkiCloze lua require('anki').Anki.Run("Cloze") -- Cloze card type
+command! AnkiReverse lua require('anki').Anki.Run("Basic (and reversed card)") -- Basic and Reverse card type
 
 let &cpo = s:save_cpo " Restore the original 'cpo' option
 unlet s:save_cpo
