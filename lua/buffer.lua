@@ -84,9 +84,10 @@ Buffer.Save = function(data)
 	local buf = data.buf
 	local deck = data.deck
 	local fields = Utils.GetFieldsFromBuff(buf, data.fields)
+	local tags = Utils.ExtractTags(buf)
 	local model = data.model
 
-	local res = API.AddCard(deck, model, fields)
+	local res = API.AddCard(deck, model, fields, tags)
 	if res then
 		api.nvim_command("noautocmd q!")
 	end

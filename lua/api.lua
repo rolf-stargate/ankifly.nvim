@@ -40,7 +40,7 @@ API.GetModelFieldNames = function(model_name)
 end
 
 -- ### Add Card ###################################################################
-API.AddCard = function(deck_name, model_name, fields)
+API.AddCard = function(deck_name, model_name, fields, tags)
 	local body = {
 		action = "addNote",
 		version = 6,
@@ -49,6 +49,7 @@ API.AddCard = function(deck_name, model_name, fields)
 				deckName = deck_name,
 				modelName = model_name,
 				fields = fields,
+				tags = tags,
 				options = {
 					allowDuplicate = false,
 					duplicateScope = "deck",

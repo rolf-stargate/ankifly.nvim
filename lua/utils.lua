@@ -36,6 +36,19 @@ Utils.ExtractField = function(buf, field)
 	return text
 end
 
+Utils.ExtractTags = function(buf)
+	local tags = ""
+	local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+	for _, line in ipairs(lines) do
+		if string.match(line, "^+%w+") then
+			line = string.gsub(line, " ", "")
+			local tag_list = vim.split(line, "+")
+			break
+		end
+	end
+	return tags_list
+end
+
 Utils.CheckForCodeBlocks = function(text)
 	local match = string.match(text, "```")
 	while match do
