@@ -54,20 +54,31 @@ Utils.CheckForCodeBlocks = function(text)
 	local match = string.match(text, "```")
 	while match do
 		local language = string.match(text, "```%s*(%w+)")
+		local lang_start_index, lang_end_index = string.find(text, "```%s*%w+")
+		local match_start_index, match_end_index = string.find(text, "```")
+
+		if lang_start_index ~= match_start_index then
+			language = nil
+		end
+
 		if language then
-			text = string.gsub(text, language, "", 1)
 			text = string.gsub(
 				text,
-				"```",
-				'<pre style="display:flex; justify-content:center;"><code class="language-' .. language .. '"><br>',
+				"```" .. language,
+				'<pre style="display:flex; justify-content:center;"><code class="language-' .. language .. '">',
 				1
 			)
 			text = string.gsub(text, "```", "</code></pre><br><br>", 1)
 			match = string.match(text, "```")
 		else
-			print("Error in code block!")
-			print("string to parse was: " .. text)
-			break
+			text = string.gsub(
+				text,
+				"```",
+				'<pre style="display:flex; justify-content:center;"><code class="language-sh">',
+				1
+			)
+			text = string.gsub(text, "```", "</code></pre><br><br>", 1)
+			match = string.match(text, "```")
 		end
 	end
 
@@ -75,15 +86,11 @@ Utils.CheckForCodeBlocks = function(text)
 end
 
 Utils.replaceBrTagInCodeBlock = function(text)
-	local codeBlockContent = string.match(text, '<code class=".-"><br><br>(.-)</code>')
+	local codeBlockContent = string.match(text, '<code class=".-">(.-)</code>')
 	if codeBlockContent then
 		local parsedCodeBlockContent = string.gsub(codeBlockContent, "<br>", "\n")
-		print(parsedCodeBlockContent)
-		text = string.gsub(
-			text,
-			'<code class=".-"><br><br>.-</code>',
-			'<code class=".-"><br>' .. parsedCodeBlockContent .. "</code>"
-		)
+		parsedCodeBlockContent = string.gsub(parsedCodeBlockContent, "\n", "", 1)
+		text = string.gsub(text, codeBlockContent, parsedCodeBlockContent)
 	end
 
 	return text
