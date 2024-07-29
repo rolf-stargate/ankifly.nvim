@@ -40,9 +40,10 @@ Utils.ExtractTags = function(buf)
 	local tags = ""
 	local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
 	for _, line in ipairs(lines) do
-		if string.match(line, "^+%w+") then
+		if string.match(line, "^+") then
 			line = string.gsub(line, " ", "")
 			local tag_list = vim.split(line, "+")
+			print(table.concat(tag_list, ","))
 			break
 		end
 	end
