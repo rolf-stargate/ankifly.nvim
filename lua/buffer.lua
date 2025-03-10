@@ -25,13 +25,14 @@ Buffer.ConfigWindow = function(buf)
 	local col = math.floor((vim.o.columns - width) / 2)
 
 	local win = api.nvim_open_win(buf, true, {
-		relative = "editor",
-		width = width,
-		height = height,
-		row = row,
-		col = col,
-		style = "minimal",
-		border = "single",
+		split = "below",
+		-- title = "Anki",
+		-- width = width,
+		-- height = height,
+		-- row = row,
+		-- col = col,
+		-- style = "minimal",
+		-- border = "single",
 	})
 
 	return win
@@ -45,7 +46,7 @@ Buffer.SetDefaultsOptions = function(buf, win)
 	-- Set the cursor position to the first line of the buffer
 	api.nvim_win_set_cursor(win, { 1, 0 })
 	-- Set the filetype to markdown
-	api.nvim_buf_set_option(buf, "filetype", "markdown")
+	api.nvim_buf_set_option(buf, "filetype", "vimwiki")
 	-- Set Spell
 	api.nvim_command("setlocal spell")
 	-- Set wrap
@@ -74,7 +75,7 @@ end
 
 Buffer.PopulateFields = function(buf, fields)
 	for key, value in pairs(fields) do
-		api.nvim_buf_set_lines(buf, key - 1, -1, true, { "# " .. value })
+		api.nvim_buf_set_lines(buf, key - 1, -1, true, { "## " .. value })
 	end
 end
 

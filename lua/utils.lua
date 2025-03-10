@@ -24,9 +24,9 @@ Utils.ExtractField = function(buf, field)
 	local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
 
 	for _, line in ipairs(lines) do
-		if save and string.match(line, "^# ") then
+		if save and string.match(line, "^## ") then
 			save = false
-		elseif string.match(line, "^# " .. field) then
+		elseif string.match(line, "^## " .. field) then
 			save = true
 		elseif save then
 			text = text .. line .. "\n"
@@ -86,12 +86,11 @@ Utils.CheckForCodeBlocks = function(text)
 end
 
 Utils.replaceBrTagInCodeBlock = function(text)
-	local codeBlockContent = string.match(text, '<code class=".-">(.-)</code>')
-	if codeBlockContent then
-		local parsedCodeBlockContent = string.gsub(codeBlockContent, "<br>", "\n")
-		parsedCodeBlockContent = string.gsub(parsedCodeBlockContent, "\n", "", 1)
-		text = string.gsub(text, codeBlockContent, parsedCodeBlockContent)
-	end
+	local pattern = "(<code.-</code>)"
+
+	text = string.gsub(text, pattern, function(block)
+		return string.gsub(block, "<br>", "\n")
+	end)
 
 	return text
 end
